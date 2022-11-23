@@ -29,10 +29,8 @@ public class BookService {
     public List<BookResponse> findBookds (Pageable pageable){
         Page<Book> books = bookRepository.findAll(pageable);
         List<BookResponse> bookReponses = books.stream()
-                .map(book -> {
-//                    Optional<Author> authorOpt = authorRepository.findById(book.getAuthorId());
-                    return BookResponse.of(book);
-                }).collect(Collectors.toList());
+                .map(book -> BookResponse.of(book))
+                .collect(Collectors.toList());
         return bookReponses;
 
     }
