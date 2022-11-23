@@ -14,11 +14,11 @@ public class BookResponse {
     private String name;
     private String author;
 
-    public static BookResponse of(Book book, Author author){
+    public static BookResponse of(Book book){
         return BookResponse.builder()
                 .id(book.getId())
                 .name(book.getName())
-                .author(author.getName())
+                .author(book.getAuthor().getName())
                 .build();
     }
 }
