@@ -1,6 +1,7 @@
 package com.example.springjpamapping.service;
 
 import com.example.springjpamapping.domain.Hospital;
+import com.example.springjpamapping.dto.CommentRequest;
 import com.example.springjpamapping.dto.HospitalResponse;
 import com.example.springjpamapping.repository.HospitalRepository;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class HospitalService {
-    HospitalRepository hospitalRepository;
+    private final HospitalRepository hospitalRepository;
 
     public HospitalService(HospitalRepository hospitalRepository) {
         this.hospitalRepository = hospitalRepository;
@@ -31,4 +32,6 @@ public class HospitalService {
                 .collect(Collectors.toList());
         return hospitalResponses;
     }
+
+
 }

@@ -1,12 +1,14 @@
 package com.example.springjpamapping.domain;
 
 
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @ToString
+@NoArgsConstructor
+@Getter
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,4 +19,12 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
+
+    @Builder
+    public Comment(String title, String content, String user, Hospital hospital) {
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.hospital = hospital;
+    }
 }
