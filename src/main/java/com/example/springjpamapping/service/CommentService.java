@@ -36,4 +36,9 @@ public class CommentService {
         List<Comment> comments = commentRepository.findAllByHospitalId(id);
         return comments;
     }
+
+    public CommentResponse getComment(Long id) {
+        Optional<Comment> commentOpt = commentRepository.findById(id);
+        return CommentResponse.of(commentOpt.get());
+    }
 }

@@ -46,6 +46,11 @@ public class HospitalController {
         List<Comment> comments = commentService.getCommentsByHospital(id);
         return ResponseEntity.ok().body(comments);
     }
+    @GetMapping(value = "/comments/{id}")
+    public ResponseEntity<CommentResponse> showAComment(@PathVariable Long id){
+        CommentResponse commentResponse = commentService.getComment(id);
+        return ResponseEntity.ok().body(commentResponse);
+    }
     @PostMapping(value = "/{id}/comments")
     public ResponseEntity<CommentResponse> addComment(@RequestBody CommentRequest commentRequest, @PathVariable Long id){
         CommentResponse commentResponse = commentService.addComment(commentRequest, id);
