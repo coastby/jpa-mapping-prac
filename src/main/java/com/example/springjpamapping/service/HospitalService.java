@@ -16,10 +16,13 @@ import java.util.stream.Collectors;
 @Service
 public class HospitalService {
     private final HospitalRepository hospitalRepository;
+    private final CommentService commentService;
 
-    public HospitalService(HospitalRepository hospitalRepository) {
+    public HospitalService(HospitalRepository hospitalRepository, CommentService commentService) {
         this.hospitalRepository = hospitalRepository;
+        this.commentService = commentService;
     }
+
     public HospitalResponse getHospital(Long id){
         Optional<Hospital> hospitalOptional = hospitalRepository.findById(id);
         return HospitalResponse.of(hospitalOptional.get());

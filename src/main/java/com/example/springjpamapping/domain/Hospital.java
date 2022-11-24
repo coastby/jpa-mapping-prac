@@ -17,8 +17,7 @@ public class Hospital {
     private Long id;
     private String hospitalName;
     private String roadNameAddress;
-    @OneToMany(mappedBy="hospital", fetch = FetchType.LAZY)
-    @ToString.Exclude
-    private List<Comment> commentList = new ArrayList<>();
-
+//    @OneToMany(mappedBy="hospital", fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    private List<Comment> commentList = new ArrayList<>();
 }

@@ -8,6 +8,7 @@ import com.example.springjpamapping.repository.CommentRepository;
 import com.example.springjpamapping.repository.HospitalRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +31,9 @@ public class CommentService {
                 .build();
         Comment savedComment = commentRepository.save(comment);
         return CommentResponse.of(savedComment);
+    }
+    public List<Comment> getCommentsByHospital(Long id){
+        List<Comment> comments = commentRepository.findAllByHospitalId(id);
+        return comments;
     }
 }

@@ -33,15 +33,22 @@ public class HospitalController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<List<Comment>> showHospital(@PathVariable Long id){
+    public ResponseEntity<Map<String, Object>> showHospital(@PathVariable Long id){
         HospitalResponse hospitalResponse = hospitalService.getHospital(id);
-        List<Comment> result = hospitalResponse.getCommentList();
+        List<Comment> comments = commentService.getCommentsByHospital(id);
+        Map<String, Object>  result = new HashMap<>();
+        result.put("Comments", comments);
+        result.put("Data", hospitalResponse);
         return ResponseEntity.ok().body(result);
+    }
+    @GetMapping(value = "/{id}/comments")
+    public ResponseEntity<List<Comment>> showHospitalComments(@PathVariable Long id){
+        List<Comment> comments = commentService.getCommentsByHospital(id);
+        return ResponseEntity.ok().body(comments);
     }
     @PostMapping(value = "/{id}/comments")
     public ResponseEntity<CommentResponse> addComment(@RequestBody CommentRequest commentRequest, @PathVariable Long id){
         CommentResponse commentResponse = commentService.addComment(commentRequest, id);
         return ResponseEntity.ok().body(commentResponse);
     }
-
 }

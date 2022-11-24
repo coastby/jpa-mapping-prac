@@ -14,14 +14,14 @@ public class HospitalResponse {
     private Long id;
     private String hospitalName;
     private String roadNameAddress;
-    private List<Comment> commentList;
+//    private List<Comment> commentList;
 
     public static HospitalResponse of(Hospital hospital){
         return HospitalResponse.builder()
                 .id(hospital.getId())
                 .hospitalName(hospital.getHospitalName())
                 .roadNameAddress(hospital.getRoadNameAddress())
-                .commentList(hospital.getCommentList())
+//                .commentList(hospital.getCommentList())
                 .build();
     }
 
