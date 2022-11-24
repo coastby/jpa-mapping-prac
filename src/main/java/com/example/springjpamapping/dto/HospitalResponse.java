@@ -7,6 +7,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Builder
@@ -14,14 +15,16 @@ public class HospitalResponse {
     private Long id;
     private String hospitalName;
     private String roadNameAddress;
-//    private List<Comment> commentList;
+    private List<CommentResponse> commentList;
 
     public static HospitalResponse of(Hospital hospital){
+        List<CommentResponse> commentResponses = hospital.getCommentList()
+                .stream().map(CommentResponse::of).collect(Collectors.toList());
         return HospitalResponse.builder()
                 .id(hospital.getId())
                 .hospitalName(hospital.getHospitalName())
                 .roadNameAddress(hospital.getRoadNameAddress())
-//                .commentList(hospital.getCommentList())
+                .commentList(commentResponses)
                 .build();
     }
 

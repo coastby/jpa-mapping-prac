@@ -35,15 +35,15 @@ public class HospitalController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Map<String, Object>> showHospital(@PathVariable Long id){
         HospitalResponse hospitalResponse = hospitalService.getHospital(id);
-        List<Comment> comments = commentService.getCommentsByHospital(id);
+//        List<Comment> comments = commentService.getCommentsByHospital(id);
         Map<String, Object>  result = new HashMap<>();
-        result.put("Comments", comments);
+//        result.put("Comments", comments);
         result.put("Data", hospitalResponse);
         return ResponseEntity.ok().body(result);
     }
     @GetMapping(value = "/{id}/comments")
-    public ResponseEntity<List<Comment>> showHospitalComments(@PathVariable Long id){
-        List<Comment> comments = commentService.getCommentsByHospital(id);
+    public ResponseEntity<List<CommentResponse>> showHospitalComments(@PathVariable Long id){
+        List<CommentResponse> comments = commentService.getCommentsByHospital(id);
         return ResponseEntity.ok().body(comments);
     }
     @GetMapping(value = "/comments/{id}")

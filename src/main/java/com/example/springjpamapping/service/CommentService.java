@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -32,8 +33,10 @@ public class CommentService {
         Comment savedComment = commentRepository.save(comment);
         return CommentResponse.of(savedComment);
     }
-    public List<Comment> getCommentsByHospital(Long id){
-        List<Comment> comments = commentRepository.findAllByHospitalId(id);
+    public List<CommentResponse> getCommentsByHospital(Long id){
+        List<CommentResponse> comments = commentRepository.findAllByHospitalId(id).stream()
+                .map(CommentResponse::of)
+                .collect(Collectors.toList());
         return comments;
     }
 
