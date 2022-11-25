@@ -24,6 +24,7 @@ public class CommentService {
 
     public CommentResponse addComment(CommentRequest commentRequest, Long id) {
         Optional<Hospital> hospitalOpt = hospitalRepository.findById(id);
+        //DTO -> Entity로 바꾸는 로직이 서비스에 있어야 할지, 컨트롤러에 있어야 할 지 잘 모르겠다..
         Comment comment = Comment.builder()
                 .title(commentRequest.getTitle())
                 .content(commentRequest.getContent())
@@ -41,7 +42,9 @@ public class CommentService {
     }
 
     public CommentResponse getComment(Long id) {
-        Optional<Comment> commentOpt = commentRepository.findById(id);
-        return CommentResponse.of(commentOpt.get());
+        //예외 추가
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("해당 댓글이 없습니다."));
+        return CommentResponse.of(comment);
     }
 }

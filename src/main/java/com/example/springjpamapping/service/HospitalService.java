@@ -24,8 +24,10 @@ public class HospitalService {
     }
 
     public HospitalResponse getHospital(Long id){
-        Optional<Hospital> hospitalOptional = hospitalRepository.findById(id);
-        return HospitalResponse.of(hospitalOptional.get());
+        //없을 경우 예외 발생
+        Hospital hospital = hospitalRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("찾는 병원이 없습니다."));
+        return HospitalResponse.of(hospital);
     }
 
     public List<HospitalResponse> getHospitals(Pageable pageable) {

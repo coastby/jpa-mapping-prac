@@ -5,23 +5,20 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class CommentResponse {
     private String title;
     private String content;
     private String user;
+    private String hospitalName;
 
-    @Builder
-    public CommentResponse(String title, String content, String user) {
-        this.title = title;
-        this.content = content;
-        this.user = user;
-    }
 
     public static CommentResponse of(Comment comment){
         return CommentResponse.builder()
                 .title(comment.getTitle())
                 .content(comment.getContent())
                 .user(comment.getUser())
+                .hospitalName(comment.getHospital().getHospitalName())
                 .build();
     }
 
